@@ -3,47 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fahmi Dinsefa - Portfolio</title>
+    <title>Fahmi D | Home</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">&lt;C/&gt; Fahmi</div>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Blogs</a></li>
-                <li><input type="text" placeholder="Search..."></li>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">Telegram</a></li>
-                <li><a href="#">Github</a></li>
-            </ul>
-        </nav>
-    </header>
-    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">Fahmi D</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">hello</a></li>
+            <li><a href="about.html">about-me</a></li>
+            <li><a href="experience.html">experience</a></li>
+            <li><a href="projects.html">projects</a></li>
+            <li><a href="contact.html">contact-me</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
     <section class="hero">
-        <h1>Developer</h1>
-        <h2>Hey, I'm <span>Fahmi </span>, Full-Stack Developer</h2>
-        <p>I help businesses grow by crafting amazing web experiences.</p>
-        <a href="#" class="cta">Let's Talk</a>
+        <div class="hero-content">
+            <h1>Hi, I’m <span class="highlight">Fahmi D</span></h1>
+            <h2>> <span class="highlight">Software Engineer</span></h2>
+            <p class="comment">// Crafting innovative solutions with creativity and code.</p>
+            <p class="code-snippet">
+                <span class="code-keyword">const</span> githubLink = <span class="code-string">"https://github.com/porcif"</span>;
+            </p>
+        </div>
+        <!-- <div class="interactive-box">
+            <p class="box-title">// code rain</p>
+            <div class="code-rain-area">
+                <canvas id="codeRainCanvas"></canvas>
+            </div>
+        </div> -->
     </section>
 
-    <section class="info">
-        <div class="card">
-            <img src="profile.jpg" alt="Sinan">
-            <h3>Fahmi</h3>
-            <p>Full-Stack Developer</p>
-            <p>Email: fahmi.dinsefa2@gmail.com</p>
-            <p>Location: Ethiopia</p>
-            <a href="#" class="cv-button">Download CV</a>
-        </div>
-        <div class="experience">
-            <p>4 Programming Languages</p>
-            <p>6 Development Tools</p>
-            <p>8 Years of Experience</p>
-        </div>
-    </section>
-
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
