@@ -7,17 +7,26 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="dark-mode">
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo">Fahmi D</div>
         <ul class="nav-links">
-            <li><a href="index.html" class="active">hello</a></li>
-            <li><a href="about.html">about-me</a></li>
-            <li><a href="experience.html">experience</a></li>
-            <li><a href="projects.html">projects</a></li>
-            <li><a href="contact.html">contact-me</a></li>
+            <li><a href="index.html" class="active">_hello</a></li>
+            <li><a href="about.html">_about-me</a></li>
+            <li><a href="experience.html">_experience</a></li>
+            <li><a href="projects.html">_projects</a></li>
+            <li><a href="contact.html">_contact-me</a></li>
         </ul>
+        <div class="theme-toggle">
+            <label class="switch">
+                <input type="checkbox" id="themeSwitch">
+                <span class="slider round">
+                    <span class="icon moon">🌙</span>
+                    <span class="icon sun">☀️</span>
+                </span>
+            </label>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -25,17 +34,20 @@
         <div class="hero-content">
             <h1>Hi, I’m <span class="highlight">Fahmi D</span></h1>
             <h2>> <span class="highlight">Software Engineer</span></h2>
-            <p class="comment">// Crafting innovative solutions with creativity and code.</p>
+            <p class="comment">// I bring ideas to life with code and creativity.</p>
             <p class="code-snippet">
                 <span class="code-keyword">const</span> githubLink = <span class="code-string">"https://github.com/porcif"</span>;
             </p>
-        </div>
-        <!-- <div class="interactive-box">
-            <p class="box-title">// code rain</p>
-            <div class="code-rain-area">
-                <canvas id="codeRainCanvas"></canvas>
+            <div class="cta-buttons">
+                <a href="assets/files/resume.pdf" class="cta-button" download>Download Resume</a>
+                <a href="contact.html" class="cta-button">Contact Me</a>
             </div>
-        </div> -->
+        </div>
+        <div class="interactive-box">
+            <div class="particle-area">
+                <canvas id="particleCanvas"></canvas>
+            </div>
+        </div>
     </section>
 
     <script src="assets/js/script.js"></script>

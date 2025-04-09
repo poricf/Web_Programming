@@ -1,93 +1,144 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const gremlin = document.getElementById('gremlin');
-    const speechBubble = document.getElementById('speech-bubble');
-    const commandInput = document.getElementById('command-input');
-    const heroContent = document.querySelector('.hero-content');
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
 
-    const quips = [
-        '// TODO: Stop breaking things',
-        'SyntaxError: Coffee not found',
-        'Ctrl+C, Ctrl+V, profit!',
-        'I debug in production, fight me'
-    ];
+    // Set canvas size
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
 
-    const showSpeech = (text, duration = 2000) => {
-        speechBubble.textContent = text;
-        speechBubble.classList.add('show');
-        setTimeout(() => speechBubble.classList.remove('show'), duration);
-    };
+    // Particle array
+    const particles = [];
+    const particleCount = 200;
+    const text = 'Fahmi';
 
-    // Random idle quip every few seconds
-    setInterval(() => {
-        if (!speechBubble.classList.contains('show')) {
-            showSpeech(quips[Math.floor(Math.random() * quips.length)]);
-        }
-    }, 5000);
+    // Colors for particles (purple shades)
+    const colors = ['#A855F7', '#6B21A8', '#D8B4FE'];
 
-    // Hover reaction
-    gremlin.addEventListener('mouseover', () => {
-        showSpeech('Oi, you hovering over my code?!');
-        gremlin.style.animation = 'shake 0.5s infinite';
-    });
+    // Mouse position for interactivity
+    let mouse = { x: null, y: null };
+    let isHovering = false;
 
-    gremlin.addEventListener('mouseout', () => {
-        gremlin.style.animation = 'typing 1s infinite alternate';
-    });
+    // Create particles based on text
+    function createParticlesFromText() {
+        ctx.font = '80px Poppins';
+        ctx.fillStyle = '#FFF';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
 
-    // Click to break the page
-    gremlin.addEventListener('click', () => {
-        showSpeech('You asked for it!');
-        const originalText = heroContent.innerHTML;
-        heroContent.innerHTML = heroContent.textContent.split('').sort(() => Math.random() - 0.5).join('');
-        setTimeout(() => heroContent.innerHTML = originalText, 2000);
-    });
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
 
-    // Command input
-    commandInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            const command = commandInput.value.toLowerCase().trim();
-            commandInput.value = '';
-            switch (command) {
-                case 'coffee':
-                    showSpeech('Ahh, sweet nectar!');
-                    gremlin.style.animation = 'dance 1s infinite';
-                    setTimeout(() => gremlin.style.animation = 'typing 1s infinite alternate', 3000);
-                    break;
-                case 'bug':
-                    showSpeech('AHH! Bugs everywhere!');
-                    for (let i = 0; i < 5; i++) {
-                        const bug = document.createElement('div');
-                        bug.textContent = '🐞';
-                        bug.style.position = 'absolute';
-                        bug.style.left = `${Math.random() * 280}px`;
-                        bug.style.top = `${Math.random() * 130}px`;
-                        document.querySelector('.gremlin-container').appendChild(bug);
-                        setTimeout(() => bug.remove(), 2000);
-                    }
-                    break;
-                case 'debug':
-                    showSpeech('Fixed it... probably.');
-                    break;
-                default:
-                    showSpeech('Huh? What’s that supposed to do?');
+        // Clear the canvas after getting the text data
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Create particles at text positions
+        for (let y = 0; y < canvas.height; y += 2) {
+            for (let x = 0; x < canvas.width; x += 2) {
+                const index = (y * canvas.width + x) * 4;
+                if (data[index + 3] > 128) { // If pixel is part of the text (alpha > 128)
+                    particles.push({
+                        x: x,
+                        y: y,
+                        homeX: x,
+                        homeY: y,
+                        vx: 0,
+                        vy: 0,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        size: Math.random() * 2 + 1
+                    });
+                }
             }
         }
+    }
+
+    // Particle animation
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach(p => {
+            // Apply forces
+            if (isHovering && mouse.x && mouse.y) {
+                // Scatter particles when hovering
+                const dx = mouse.x - p.x;
+                const dy = mouse.y - p.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 50) {
+                    const force = (50 - distance) / 50;
+                    p.vx -= force * dx * 0.1;
+                    p.vy -= force * dy * 0.1;
+                }
+            } else {
+                // Return to home position
+                const dx = p.homeX - p.x;
+                const dy = p.homeY - p.y;
+                p.vx += dx * 0.05;
+                p.vy += dy * 0.05;
+            }
+
+            // Damping
+            p.vx *= 0.95;
+            p.vy *= 0.95;
+
+            // Update position
+            p.x += p.vx;
+            p.y += p.vy;
+
+            // Draw particle
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+        });
+
+        requestAnimationFrame(animateParticles);
+    }
+
+    // Initialize particles
+    createParticlesFromText();
+    animateParticles();
+
+    // Mouse interaction
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+        isHovering = true;
+    });
+
+    canvas.addEventListener('mouseout', () => {
+        isHovering = false;
+        mouse.x = null;
+        mouse.y = null;
     });
 });
 
-// Extra animation for shaking
-const styleSheet = document.createElement('style');
-styleSheet.textContent = `
-    @keyframes shake {
-        0% { transform: translateX(-50%) translateY(0); }
-        25% { transform: translateX(-50%) translateY(-5px) rotate(5deg); }
-        75% { transform: translateX(-50%) translateY(-5px) rotate(-5deg); }
-        100% { transform: translateX(-50%) translateY(0); }
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const themeSwitch = document.getElementById('themeSwitch');
+    const body = document.body;
+
+    // Check for saved theme preference in localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        body.classList.remove('dark-mode', 'light-mode');
+        body.classList.add(savedTheme);
+        themeSwitch.checked = savedTheme === 'light-mode';
     }
-    @keyframes dance {
-        0% { transform: translateX(-50%) scale(1); }
-        50% { transform: translateX(-50%) scale(1.2) rotate(10deg); }
-        100% { transform: translateX(-50%) scale(1); }
-    }
-`;
-document.head.appendChild(styleSheet);
+
+    // Toggle theme on switch change
+    themeSwitch.addEventListener('change', () => {
+        if (themeSwitch.checked) {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light-mode');
+        } else {
+            body.classList.remove('light-mode');
+            body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark-mode');
+        }
+    });
+});
