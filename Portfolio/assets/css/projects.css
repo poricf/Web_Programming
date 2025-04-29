@@ -1,0 +1,140 @@
+/* Projects Page Styles */
+.projects-page {
+    padding: 120px 5% 80px;
+    min-height: 100vh;
+}
+
+.projects-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.projects-header h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #a855f7;
+}
+
+.projects-header p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.projects-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Filter Sidebar */
+.filter-sidebar {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 30px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    border: 1px solid rgba(168, 85, 247, 0.1);
+}
+
+.filter-section {
+    margin-bottom: 30px;
+}
+
+.filter-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #a855f7;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.filter-option:hover {
+    color: #a855f7;
+}
+
+.filter-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid #a855f7;
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.filter-option input[type="checkbox"]:checked {
+    background: #a855f7;
+}
+
+.filter-option input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.clear-filters {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #a855f7;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clear-filters:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .projects-container {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-sidebar {
+        position: static;
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+} 

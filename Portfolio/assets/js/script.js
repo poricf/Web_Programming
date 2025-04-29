@@ -353,3 +353,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
   
+  // Remove all carousel-related code 
