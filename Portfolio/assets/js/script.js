@@ -354,3 +354,281 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   
   // Remove all carousel-related code 
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    // Observe all achievement cards
+    document.querySelectorAll('.achievement-card').forEach(card => {
+        observer.observe(card);
+    });
+
+    // Observe stats section
+    observer.observe(document.querySelector('.achievement-stats'));
+
+    // Counter animation for stats
+    function animateCounter() {
+        const statsSection = document.querySelector('.achievement-stats');
+        if (statsSection.classList.contains('show')) {
+            document.querySelectorAll('.stat-item').forEach(item => {
+                const target = parseInt(item.getAttribute('data-count'));
+                const statNumber = item.querySelector('.stat-number');
+                const current = parseInt(statNumber.innerText);
+                
+                // Calculate increment based on target value
+                const increment = target > 100 ? Math.ceil(target / 100) : 1;
+                
+                if (current < target) {
+                    statNumber.innerText = Math.min(current + increment, target);
+                    setTimeout(animateCounter, 20);
+                }
+            });
+        }
+    }
+
+    // Start counter animation when stats are visible
+    const statsObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            setTimeout(animateCounter, 500);
+        }
+    }, { threshold: 0.5 });
+    
+    statsObserver.observe(document.querySelector('.achievement-stats'));
+
+    // Hover effect for achievement cards
+    document.querySelectorAll('.achievement-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+            this.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.15)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+        });
+    });
+
+    // Parallax effect for background
+    document.addEventListener('mousemove', function(e) {
+        const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+        const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+        
+        document.querySelector('.achievements-section').style.backgroundPosition = `calc(50% + ${moveX}px) calc(50% + ${moveY}px)`;
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // SVG Gradient for stat circles
+  const svgNS = "http://www.w3.org/2000/svg";
+  const defs = document.createElementNS(svgNS, "defs");
+  const gradient = document.createElementNS(svgNS, "linearGradient");
+  gradient.setAttribute("id", "gradient");
+  gradient.setAttribute("x1", "0%");
+  gradient.setAttribute("y1", "0%");
+  gradient.setAttribute("x2", "100%");
+  gradient.setAttribute("y2", "0%");
+  
+  const stop1 = document.createElementNS(svgNS, "stop");
+  stop1.setAttribute("offset", "0%");
+  stop1.setAttribute("stop-color", "#a855f7");
+  
+  const stop2 = document.createElementNS(svgNS, "stop");
+  stop2.setAttribute("offset", "100%");
+  stop2.setAttribute("stop-color", "#f472b6");
+  
+  gradient.appendChild(stop1);
+  gradient.appendChild(stop2);
+  defs.appendChild(gradient);
+  
+  document.querySelectorAll('.stat-circle').forEach(circle => {
+    circle.appendChild(defs.cloneNode(true));
+  });
+  
+  // Intersection Observer for animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (entry.target.classList.contains('achievement-card')) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        } else if (entry.target.classList.contains('achievements-stats')) {
+          animateStats();
+        }
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+  
+  // Apply initial styles for animation
+  document.querySelectorAll('.achievement-card').forEach((card, index) => {
+    card.style.opacity = 0;
+    card.style.transform = 'translateY(50px)';
+    card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+    observer.observe(card);
+  });
+  
+  // Observe stats section
+  observer.observe(document.querySelector('.achievements-stats'));
+  
+  // Animate stat circles and numbers
+  function animateStats() {
+    document.querySelectorAll('.stat-item').forEach(item => {
+      const count = parseInt(item.getAttribute('data-count'));
+      const circle = item.querySelector('.stat-circle-progress');
+      const number = item.querySelector('.stat-number');
+      
+      // Calculate circle circumference and offset
+      const radius = circle.getAttribute('r');
+      const circumference = 2 * Math.PI * radius;
+      
+      // Set the circle's stroke-dasharray to the circumference
+      circle.style.strokeDasharray = circumference;
+      
+      // Calculate percentage for the circle
+      let percentage;
+      if (count >= 1000) {
+        // For year stats, show full circle
+        percentage = 100;
+      } else {
+        // For other stats, calculate percentage based on a max value
+        const maxValue = 10; // Adjust this based on your expected max values
+        percentage = Math.min((count / maxValue) * 100, 100);
+      }
+      
+      // Calculate the dash offset
+      const dashOffset = circumference - (percentage / 100) * circumference;
+      
+      // Animate the circle
+      setTimeout(() => {
+        circle.style.strokeDashoffset = dashOffset;
+      }, 100);
+      
+      // Animate the number
+      animateNumber(number, count);
+    });
+  }
+  
+  // Animate counter
+  function animateNumber(element, target) {
+    let current = 0;
+    const increment = target > 100 ? Math.ceil(target / 100) : 1;
+    const duration = 2000; // 2 seconds
+    const steps = Math.ceil(duration / 16); // 60fps
+    const step = Math.max(1, Math.floor(target / steps));
+    
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        element.textContent = target;
+        clearInterval(timer);
+      } else {
+        element.textContent = current;
+      }
+    }, 16);
+  }
+  
+  // Filter functionality
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const achievementCards = document.querySelectorAll('.achievement-card');
+  
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      
+      // Add active class to clicked button
+      button.classList.add('active');
+      
+      // Get filter value
+      const filter = button.getAttribute('data-filter');
+      
+      // Filter cards
+      achievementCards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = 'block';
+          setTimeout(() => {
+            card.style.opacity = 1;
+            card.style.transform = 'translateY(0)';
+          }, 100);
+        } else {
+          card.style.opacity = 0;
+          card.style.transform = 'translateY(50px)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 600);
+        }
+      });
+    });
+  });
+  
+  // 3D tilt effect for cards
+  document.querySelectorAll('.achievement-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenterX = cardRect.left + cardRect.width / 2;
+      const cardCenterY = cardRect.top + cardRect.height / 2;
+      
+      const mouseX = e.clientX - cardCenterX;
+      const mouseY = e.clientY - cardCenterY;
+      
+      // Calculate rotation values (limited to a small range)
+      const rotateY = mouseX * 0.01; // Max ±10 degrees
+      const rotateX = -mouseY * 0.01; // Max ±10 degrees
+      
+      // Apply the rotation
+      card.querySelector('.card-content').style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      // Reset the rotation when mouse leaves
+      card.querySelector('.card-content').style.transform = 'perspective(1500px) rotateX(0) rotateY(0)';
+    });
+  });
+  
+  // Parallax effect for background
+  document.addEventListener('mousemove', e => {
+    const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+    const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+    
+    document.querySelector('.achievements-bg').style.transform = `translate(${moveX}px, ${moveY}px)`;
+  });
+});
+
+// Animate skills section on scroll
+function animateSkillsSection() {
+  const skillsSection = document.getElementById('skills');
+  if (!skillsSection) return;
+  const cards = skillsSection.querySelectorAll('.skills-category-card');
+  const badges = skillsSection.querySelectorAll('.skill-badge');
+  const windowHeight = window.innerHeight;
+  const sectionTop = skillsSection.getBoundingClientRect().top;
+  if (sectionTop < windowHeight - 100) {
+    // Animate cards
+    cards.forEach((card, i) => {
+      setTimeout(() => card.classList.add('show'), i * 120);
+    });
+    // Animate badges with stagger
+    let badgeDelay = 0;
+    cards.forEach((card) => {
+      const cardBadges = card.querySelectorAll('.skill-badge');
+      cardBadges.forEach((badge, j) => {
+        setTimeout(() => badge.classList.add('show'), badgeDelay + j * 70);
+      });
+      badgeDelay += cardBadges.length * 70 + 100;
+    });
+    // Remove scroll listener after animation
+    window.removeEventListener('scroll', animateSkillsSection);
+  }
+}
+window.addEventListener('scroll', animateSkillsSection);
+animateSkillsSection();
