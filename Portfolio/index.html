@@ -3,25 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fahmi D | Home</title>
+    <title>Fahmi D - Software Engineer</title>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="dark-mode">
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <span class="loader-text">Loading</span>
+            <div class="dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="logo">Fahmi D</div>
+        <div class="logo">FD</div>
         <ul class="nav-links">
-            <li><a href="index.html" class="active">_hello</a></li>
-            <li><a href="about.html">_about-me</a></li>
-            <li><a href="experience.html">_experience</a></li>
-            <li><a href="projects.html">_projects</a></li>
-            <li><a href="contact.html">_contact-me</a></li>
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <div class="theme-toggle">
             <label class="switch">
                 <input type="checkbox" id="themeSwitch">
-                <span class="slider round">
+                <span class="slider">
                     <span class="icon moon">🌙</span>
                     <span class="icon sun">☀️</span>
                 </span>
@@ -29,18 +50,37 @@
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
     <!-- Hero Section -->
-    <section class="hero">
+    <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Hi, I’m <span class="highlight">Fahmi D</span></h1>
+            <h1>Hi, I'm <span class="highlight">Fahmi D</span></h1>
             <h2>> <span class="highlight">Software Engineer</span></h2>
             <p class="comment">// I bring ideas to life with code and creativity.</p>
             <p class="code-snippet">
-                <span class="code-keyword">const</span> githubLink = <span class="code-string">"https://github.com/porcif"</span>;
+                <span class="code-keyword">const</span> skills = [<span class="code-string">"problem solving"</span>, <span class="code-string">"web dev"</span>, <span class="code-string">"creativity"</span>];
+                <br>
+                <span class="code-keyword">function</span> <span class="highlight">createSolution</span>() {
+                <br>
+                &nbsp;&nbsp;// Your vision, my code
+                <br>
+                }
             </p>
             <div class="cta-buttons">
                 <a href="assets/files/resume.pdf" class="cta-button" download>Download Resume</a>
-                <a href="contact.html" class="cta-button">Contact Me</a>
+                <a href="#contact" class="cta-button">Contact Me</a>
             </div>
         </div>
         <div class="interactive-box">
@@ -49,6 +89,417 @@
             </div>
         </div>
     </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="section-header reveal-fade">
+            <h2>About Me</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="about-container">
+            <div class="about-image reveal-left">
+                <div class="image-frame">
+                    <div class="image-placeholder">
+                        <span>FD</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-text reveal-right">
+                <p>I'm a passionate software engineer with a focus on creating elegant, efficient solutions to complex problems. With expertise in web development and a keen eye for design, I strive to build applications that are both functional and beautiful.</p>
+                <p>My journey in tech began with a curiosity about how things work, which evolved into a career building digital experiences that make a difference. I'm constantly learning and exploring new technologies to stay at the cutting edge of web development.</p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">30+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <div class="section-header reveal-fade">
+            <h2>My Skills</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="skills-container">
+            <div class="skills-category reveal-fade">
+                <h3>Frontend Development</h3>
+                <div class="skills-list">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">HTML5 & CSS3</span>
+                            <span class="skill-percentage">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">JavaScript</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">React.js</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">UI/UX Design</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="skills-category reveal-fade">
+                <h3>Backend Development</h3>
+                <div class="skills-list">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Node.js</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">PHP</span>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">MySQL</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">MongoDB</span>
+                            <span class="skill-percentage">70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="skills-tools reveal-fade">
+                <h3>Tools & Technologies</h3>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <div class="tool-icon">💻</div>
+                        <div class="tool-name">Git</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🔧</div>
+                        <div class="tool-name">Docker</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🎨</div>
+                        <div class="tool-name">Figma</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🚀</div>
+                        <div class="tool-name">AWS</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">📱</div>
+                        <div class="tool-name">Responsive Design</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🔍</div>
+                        <div class="tool-name">SEO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience-section">
+        <div class="section-header reveal-fade">
+            <h2>Work Experience</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item reveal-left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2021 - Present</div>
+                <div class="timeline-content">
+                    <h3>Senior Software Engineer</h3>
+                    <h4>Tech Innovations Inc.</h4>
+                    <p>Leading development of web applications using modern JavaScript frameworks. Mentoring junior developers and implementing best practices for code quality and performance.</p>
+                    <div class="timeline-tags">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>AWS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item reveal-right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2019 - 2021</div>
+                <div class="timeline-content">
+                    <h3>Frontend Developer</h3>
+                    <h4>Digital Solutions Co.</h4>
+                    <p>Developed responsive web interfaces and implemented complex UI features. Collaborated with designers to translate mockups into functional web pages.</p>
+                    <div class="timeline-tags">
+                        <span>JavaScript</span>
+                        <span>CSS3</span>
+                        <span>UI/UX</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item reveal-left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2017 - 2019</div>
+                <div class="timeline-content">
+                    <h3>Web Developer</h3>
+                    <h4>Creative Agency</h4>
+                    <p>Built and maintained websites for various clients. Implemented responsive designs and integrated content management systems.</p>
+                    <div class="timeline-tags">
+                        <span>HTML/CSS</span>
+                        <span>PHP</span>
+                        <span>MySQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="section-header reveal-fade">
+            <h2>My Projects</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <!-- Project Categories Filter -->
+        <div class="projects-filter reveal-fade">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="web">Web Apps</button>
+            <button class="filter-btn" data-category="mobile">Mobile</button>
+            <button class="filter-btn" data-category="design">UI/UX</button>
+        </div>
+        
+        <div class="projects-container">
+            <div class="project-card reveal-fade" data-category="web">
+                <div class="project-image">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">View Project</a>
+                            <a href="#" class="project-link">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>E-Commerce Platform</h3>
+                    <p>A full-featured online store with product catalog, shopping cart, and secure checkout process.</p>
+                    <div class="project-tags">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal-fade" data-category="mobile">
+                <div class="project-image">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">View Project</a>
+                            <a href="#" class="project-link">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Task Management App</h3>
+                    <p>A productivity application for organizing tasks, setting deadlines, and tracking progress.</p>
+                    <div class="project-tags">
+                        <span>React Native</span>
+                        <span>Firebase</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal-fade" data-category="design">
+                <div class="project-image">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">View Project</a>
+                            <a href="#" class="project-link">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Portfolio Website</h3>
+                    <p>A responsive portfolio website with interactive elements and smooth animations.</p>
+                    <div class="project-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal-fade" data-category="web">
+                <div class="project-image">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">View Project</a>
+                            <a href="#" class="project-link">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Blog Platform</h3>
+                    <p>A modern blogging platform with markdown support and user authentication.</p>
+                    <div class="project-tags">
+                        <span>Next.js</span>
+                        <span>Prisma</span>
+                        <span>PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="achievements-section">
+        <div class="section-header reveal-fade">
+            <h2>Achievements</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="achievements-container">
+            <div class="achievement-card reveal-fade">
+                <div class="achievement-icon">🏆</div>
+                <div class="achievement-content">
+                    <h3>Best Web Application Award</h3>
+                    <p>Received recognition for developing an innovative web application at the 2022 Tech Summit.</p>
+                </div>
+            </div>
+            <div class="achievement-card reveal-fade">
+                <div class="achievement-icon">🎓</div>
+                <div class="achievement-content">
+                    <h3>Master's Degree in Computer Science</h3>
+                    <p>Graduated with honors from University of Technology, specializing in Web Technologies.</p>
+                </div>
+            </div>
+            <div class="achievement-card reveal-fade">
+                <div class="achievement-icon">📜</div>
+                <div class="achievement-content">
+                    <h3>Certified Full Stack Developer</h3>
+                    <p>Completed advanced certification in modern web development technologies and best practices.</p>
+                </div>
+            </div>
+            <div class="achievement-card reveal-fade">
+                <div class="achievement-icon">💡</div>
+                <div class="achievement-content">
+                    <h3>Open Source Contributor</h3>
+                    <p>Active contributor to several popular open source projects with over 500+ GitHub stars.</p>
+                </div>
+            </div>
+            <div class="achievement-card reveal-fade">
+                <div class="achievement-icon">🌟</div>
+                <div class="achievement-content">
+                    <h3>Hackathon Winner</h3>
+                    <p>First place in the 2021 Global Code Challenge for innovative solution to real-world problems.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Scroll Indicator Dots -->
+        <div class="scroll-indicator">
+            <div class="scroll-dot active"></div>
+            <div class="scroll-dot"></div>
+            <div class="scroll-dot"></div>
+            <div class="scroll-dot"></div>
+            <div class="scroll-dot"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="section-header reveal-fade">
+            <h2>Get In Touch</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info reveal-left">
+                <p>Feel free to reach out if you're looking for a developer, have a question, or just want to connect.</p>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <a href="mailto:hello@fahmid.dev">hello@fahmid.dev</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🔗</span>
+                    <a href="https://linkedin.com/in/fahmid" target="_blank">linkedin.com/in/fahmid</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">💻</span>
+                    <a href="https://github.com/porcif" target="_blank">github.com/porcif</a>
+                </div>
+                <div class="contact-social">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">TW</a>
+                    <a href="#" class="social-icon">IG</a>
+                    <a href="#" class="social-icon">LI</a>
+                </div>
+            </div>
+            <form id="contactForm" action="contact.php" method="POST" class="contact-form reveal-right">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2023 Fahmi D. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="https://github.com/porcif" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/fahmid" target="_blank">LinkedIn</a>
+            <a href="mailto:hello@fahmid.dev">Email</a>
+        </div>
+    </footer>
 
     <script src="assets/js/script.js"></script>
 </body>
